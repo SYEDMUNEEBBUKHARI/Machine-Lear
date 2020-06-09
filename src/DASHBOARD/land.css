@@ -1,0 +1,38 @@
+.text{
+    color: rgb(0, 0, 0);
+    background-color: white;
+}
+
+
+.text5{
+    color: rgb(77, 219, 224);
+    background-color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif }
+
+
+
+    .leappadding{
+
+        padding-top: 2%;
+        padding-bottom: 5%;
+    }
+    .makebt{
+        border: solid black 1px;
+        border-radius: 25px;
+        text-decoration: none;
+
+        
+    }
+
+    .setbtn{
+        background-color: transparent;
+        color:rgb(15, 209, 90);
+        box-shadow: none;
+        border: solid 1px black;
+    }
+
+
+    span.setnote{
+        
+        color:rgb(245, 19, 19);
+    }

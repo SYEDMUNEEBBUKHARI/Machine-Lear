@@ -1,0 +1,29 @@
+.new1{ 
+    width:100px;
+    color:red;
+    
+    text-align: left;
+margin-left: 0;
+}
+.chkwidth{
+
+    width:50%;
+}
+.companybg{
+
+    background-image: url("../assets/land3.jpeg");
+    background-size: cover;
+    height: 900px;
+}
+.btnsetback{
+    background-color: white;
+    border:none;
+    cursor: none;
+    outline:none;
+}
+.btnsetback :focus{
+    background-color: white;
+    border:none;
+    cursor: none;
+    outline:none;
+}

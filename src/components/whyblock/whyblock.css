@@ -1,0 +1,64 @@
+ 
+ 
+/*  
+.background{
+    background-color:whitesmoke;
+}  */
+.bgimage{
+    background-image: url("../../assets/Land1.png");
+    
+        
+
+}
+.card{
+width: 15rem;
+}
+.card:hover{
+   box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253)!important
+}
+
+.overflow{
+   overflow: hidden;
+}
+
+.card-img-top{
+   transform: scale(1);
+   transition: 0.5s ease;
+}
+.card-img-top:hover{
+   transform: scale(1.1)
+}
+.image{
+
+   height: 100%;
+
+} 
+.locat{
+   /*   */
+   opacity: 0.5;
+}
+.bg{
+   background-color: #1E1F26;
+}
+
+@media(min-Width: 320px ) and (max-width: 375px)
+{
+
+   div.overflow.ml-sm-2.card{
+
+
+      margin-left: 35px;
+   }
+   
+
+}
+
+
+@media(min-width: 425px) and (max-width: 768px){
+   
+   div.overflow.ml-sm-2.card{
+
+
+      margin-left: 65px;
+   }
+}

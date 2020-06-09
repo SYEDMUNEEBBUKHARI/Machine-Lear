@@ -1,0 +1,551 @@
+.setAlign{
+
+
+    top: 40px;
+    Left: -60px;
+    width: 20%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    padding-top: 0%;
+    padding-bottom: 0%;
+    position: fixed;
+   overflow: hidden;
+   
+   
+}
+.dishide{
+  color: rgb(0, 0, 0);
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 20px !important;
+ 
+}
+
+
+.setAlig{
+    
+
+
+    top: 40px;
+    Left: -30px;
+    width: 10%;
+  
+    height: 100%;
+    background-color: white;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    position: fixed;
+    transform: translateX(-50%);
+    
+ transition: transform 0.3s ease-out;
+ 
+overflow: hidden;
+
+
+}
+.logocolorbrand{
+    color: black;
+    font-size: 15px;
+  }
+
+  .adjust{
+
+    color: green;
+    width: 30%;
+    height: auto;
+    /* position: absolute; */
+    
+  }
+
+  .iconcolor{
+
+    color: #0EAD69;
+    
+    }
+    
+    .adjustColors{
+      color: #0EAD69;
+      font-size: 40px !important;
+      height: 100%;
+
+    }
+
+
+
+    @media(min-width: 320px) and (max-width: 374px){
+      .makeDiv{
+        background-color: lawngreen;
+       position: relative;
+        
+        z-index:-1;
+        
+      }
+  .adjust{
+
+        color: green;
+        width: 100% !important;
+        height: auto;
+        margin-left: 100px;
+        /* position: absolute !important; */
+    
+      }
+      .setAlign{
+
+
+        top: 40px;
+        Left: 0;
+        width: 0%;
+        height: 100%;
+        background-color: white;
+        padding-top: 0%;
+        padding-bottom: 0%;
+        position: fixed;
+       overflow: hidden;
+       transform: translateX(-0%);
+        
+     transition: transform 0.3s ease-out;
+     position: fixed;
+       
+       
+    }
+      
+      .dishide{
+        /* position: absolute; */
+        font-size: 18px !important;
+        position: absolute;
+        padding-left: 15px;
+       
+      }
+      /* merge navbar */
+      .setAlig{
+  
+
+        position: fixed;
+
+        top: 40px;
+        Left: 110px;
+    width: 132%;
+      
+        height: 100%;
+        background-color: white;
+        padding-top: 0%;
+        padding-bottom: 0%;
+        position: fixed;
+        transform: translateX(-50%);
+        
+     transition: transform 0.3s ease-out;
+     
+    overflow: hidden;
+    
+    
+    }
+    .adjustColors{
+      color:  #0EAD69;
+      font-size: 30px !important;
+      height: auto;
+      margin-left:75px;
+
+    }
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+      @media(min-width: 375px) and (max-width: 425px){
+
+        .makeDiv{
+          background-color: lawngreen;
+         position: relative;
+          
+          z-index:-1;
+          
+        }
+        .adjust{
+      
+              color: green;
+              width: 100% !important;
+              height: auto;
+              margin-left: 100px;
+              /* position: absolute !important; */
+          
+            }
+            .setAlign{
+      
+      
+              top: 40px;
+              Left: 0;
+              width: 0%;
+              height: 100%;
+              background-color: white;
+              padding-top: 0%;
+              padding-bottom: 0%;
+              position: fixed;
+             overflow: hidden;
+             transform: translateX(-0%);
+              
+           transition: transform 0.3s ease-out;
+             
+             
+          }
+            
+            .dishide{
+              /* position: absolute; */
+              font-size: 18px !important;
+              position: absolute;
+              padding-left: 15px;
+             
+            }
+            /* merge navbar */
+            .setAlig{
+        
+      
+      
+              top: 40px;
+              Left: 170px;
+              width: 141%;
+            
+              height: 100%;
+              background-color: white;
+              padding-top: 0%;
+              padding-bottom: 0%;
+              position: fixed;
+              transform: translateX(-50%);
+              
+           transition: transform 0.3s ease-out;
+           
+          overflow: hidden;
+          
+          
+          }
+          .adjustColors{
+            color:  #0EAD69;
+            font-size: 30px !important;
+            height: auto;
+            margin-left:100px;
+      
+          }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      @media(min-width: 425px) and (max-width: 768px){
+        .makeDiv{
+          background-color: lawngreen;
+         position: relative;
+          
+          z-index:-1;
+          
+        }
+      
+        .adjust{
+
+          color: green;
+          width: 100% !important;
+          height: auto;
+          margin-left: 100px;
+          /* position: absolute !important; */
+      
+        }
+        .setAlign{
+  
+  
+          top: 40px;
+          Left: 0;
+          width: 0%;
+          height: 100%;
+          background-color: white;
+          padding-top: 0%;
+          padding-bottom: 0%;
+          position: fixed;
+         overflow: hidden;
+         transform: translateX(-0%);
+          
+       transition: transform 0.3s ease-out;
+         
+         
+      }
+        
+        .dishide{
+          /* position: absolute; */
+          font-size: 18px !important;
+          position: absolute;
+          padding-left: 15px;
+         
+        }
+        /* merge navbar */
+        .setAlig{
+    
+  
+  
+          top: 40px;
+          Left: 230px;
+    width: 149%;
+          height: 100%;
+          background-color: white;
+          padding-top: 0%;
+          padding-bottom: 0%;
+          position: fixed;
+          transform: translateX(-50%);
+          
+       transition: transform 0.3s ease-out;
+       
+      overflow: hidden;
+      
+      
+      }
+      .adjustColors{
+        color:  #0EAD69;
+        font-size: 30px !important;
+        height: auto;
+        margin-left:125px;
+  
+      }
+        
+    }
+      @media(min-width: 768px) and (max-width: 1024px){
+        .adjust{
+
+          color: green;
+          width: 90% important;
+          height: auto;
+          margin-left: 100px;
+          /* position: absolute !important; */
+      
+        }
+        
+        .dishide{
+          /* position: absolute; */
+          font-size: 20px !important;
+          position: absolute;
+          padding-left: 10px;
+         
+        }
+        /* merge navbar */
+        .setAlig{
+    
+
+
+          top: 40px;
+          Left: 0;
+         width: 20%;
+        
+          height: 100%;
+          background-color: white;
+          padding-top: 0%;
+          padding-bottom: 0%;
+          position: fixed;
+          transform: translateX(-50%);
+          
+       transition: transform 0.3s ease-out;
+       
+      overflow: hidden;
+      
+      
+      }
+      .adjustColors{
+        color:  #0EAD69;
+        font-size: 35px !important;
+        height: auto;
+       margin-left:9px ;
+       position: relative;
+       
+  
+      }
+      .setAlign{
+
+
+        top: 40px;
+        Left: -60px;
+        width: 35%;
+        height: 100%;
+        background-color: white;
+        padding-top: 0%;
+        padding-bottom: 0%;
+        position: fixed;
+       overflow: hidden;
+       
+       
+    }
+    }
+      /* ye hai  capital size*/
+    @media(min-width: 1024px) and (max-width: 1440px){
+
+      .adjust{
+
+        color: green;
+        width: 90% important;
+        height: auto;
+        margin-left: 80px;
+        /* position: absolute !important; */
+    
+      }
+      
+      .dishide{
+        /* position: absolute; */
+        font-size: 25px;
+        position: absolute;
+        padding-left: 25px;
+       
+      }
+      /* merge navbar */
+      .setAlig{
+  
+
+
+        top: 40px;
+        Left: 0;
+       width: 10%;
+      
+        height: 100%;
+        background-color: rgb(255, 255, 255);
+        padding-top: 0%;
+        padding-bottom: 0%;
+        position: fixed;
+        transform: translateX(-50%);
+        
+     transition: transform 0.3s ease-out;
+     
+    overflow: hidden;
+    
+    
+    }
+    .adjustColors{
+      color:  #0EAD69;
+      font-size: 30px !important;
+      height: auto;
+
+    }
+      
+        
+    }
+    
+    
+    
+    @media(min-width: 1440px) and (max-width: 2560px){
+      
+      .adjust{
+
+        color: green;
+        width: 90% important;
+        height: auto;
+        margin-left: 80px;
+        /* position: absolute !important; */
+    
+      }
+      
+      .dishide{
+        /* position: absolute; */
+        font-size: 25px;
+        position: absolute;
+        padding-left: 25px;
+       
+      }
+      /* merge navbar */
+      .setAlig{
+  
+
+
+        top: 40px;
+        Left: 0;
+       width: 10%;
+      
+        height: 100%;
+        background-color: rgb(255, 255, 255);
+        padding-top: 0%;
+        padding-bottom: 0%;
+        position: fixed;
+        transform: translateX(-50%);
+        
+     transition: transform 0.3s ease-out;
+     
+    overflow: hidden;
+    
+    
+    }
+    .adjustColors{
+      color:  #0EAD69;
+      font-size: 40px !important;
+      height: auto;
+
+    }
+      
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* @media(min-width: 375px) and (max-width: 425px){
+  
+     
+    }
+    @media(min-width: 425px) and (max-width: 768px){
+    
+    
+  }
+    @media(min-width: 768px) and (max-width: 1024px){
+    
+    
+  }
+    @media(min-width: 1024px) and (max-width: 1440px){
+    
+    
+      
+  }
+  
+  
+  
+  @media(min-width: 1440px) and (max-width: 2560px){
+    
+  
+    
+      
+  } */

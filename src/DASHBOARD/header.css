@@ -1,0 +1,18 @@
+.bgimg{
+background-image: url('./build.jpeg')  ;
+background-size: cover;
+width:100%;
+height: auto;
+
+
+
+}
+
+.fontii
+{
+    font-size: 55px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding-bottom: 195px;
+}

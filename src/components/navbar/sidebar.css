@@ -1,0 +1,285 @@
+.setsidebar{
+background-color: rgb(255, 255, 255);
+width:20%;
+height:100%;
+box-shadow: -15px 0 15px -15px inset;
+
+  position: fixed;
+  margin-top : 25px;
+
+  left: 0;
+ transform: translateX(-100%);
+ transition: transform 0.3s ease-out;
+ z-index: 200;
+
+}
+ul{
+  list-style-type: none;
+  text-decoration: none;
+ color: white;
+ 
+ 
+}
+
+a{
+  text-decoration: none;
+  color:#0EAD69;
+  
+ 
+
+}
+li {
+  list-style-type: none;
+  text-decoration: none;
+  color: white;
+  margin: 0.5rem 0;
+  
+    
+  text-align: left;
+  display: block;
+
+  
+}
+
+.iconcolor{
+
+color: #0EAD69;
+
+}
+
+
+.iconcolor1{
+
+  color: rgb(0, 0, 0);
+  
+  
+  }
+
+  .colorblack{
+
+    color: rgb(0, 0, 0);
+    font-size: 10px;
+    
+    }
+  
+  .iconcolor1 :hover{
+
+    color: #0EAD69;
+
+    
+    
+    }
+  
+
+
+  .logocolorbrand{
+    color: black;
+    font-size: 15px;
+  }
+li a{
+
+
+
+  color:black;
+  list-style-type: none;
+  text-decoration: none;
+  text-align: left;
+  
+  
+
+}
+
+
+li a:hover {
+  color:black;
+  list-style-type: none;
+  text-decoration: none;
+  
+        padding: 5px;
+ text-align: left;
+ border-bottom:1px solid #0EAD69;
+ 
+    
+    
+ 
+}
+
+ 
+.setsidebaropen{
+  background-color: rgb(255, 255, 255);
+  width : 20%;
+  height : 100%;
+  box-shadow: -15px 0 15px -15px inset;
+    position : fixed;
+    
+    margin-top : 25px;
+
+    left : 0;
+transform: translateX(0);
+
+}
+
+
+.btnsetting{
+
+  background-color: black;
+border-style: none;
+color: white;
+display: contents;
+
+}
+button.btn:hover{
+
+  color:black;
+  list-style-type: none;
+  text-decoration: none;
+  
+        padding-left: 15px;
+ text-align: left;
+ border-bottom:1px solid #0EAD69;
+
+
+}
+button.btn{
+  color:black;
+  list-style-type: none;
+  text-decoration: none;
+  
+        padding: 5px;
+ text-align: left;
+ 
+
+}
+.btnsetting:focus {
+  outline: none !important;
+  outline-offset: none !important;
+}
+/* .btnsetting :hover{
+
+  list-style-type: none;
+  text-decoration: none;
+  color: white;
+  margin: 0.5rem 0;
+  background-color: red;
+  width: 100%;
+  
+} */
+
+ 
+/* li  :hover{
+text-align: left;
+ 
+  
+} */
+.navAlign{
+  text-align: center;
+  
+}
+@media(min-width: 320px) and (max-width: 375px){
+  .setsidebar{
+    background-color: rgb(255, 255, 255);
+    width:25%;
+    height:100%;
+    box-shadow: -15px 0 15px -15px inset;
+    
+      position: fixed;
+      margin-top : 25px;
+    
+      left: 0;
+     transform: translateX(-100%);
+     transition: transform 0.3s ease-out;
+     z-index: 200;
+    
+    }
+  
+  .setsidebaropen{
+    background-color: rgb(255, 255, 255);
+    width : 100%;
+    height : 100%;
+    box-shadow: -15px 0 15px -15px inset;
+      position : fixed;
+      
+      margin-top : 25px;
+  
+      left : 0;
+  transform: translateX(0);
+  
+  }
+}
+  
+
+
+@media(min-width: 375px) and (max-width: 425px){
+  
+  .setsidebaropen{
+    background-color: rgb(255, 255, 255);
+    width : 100%;
+    height : 100%;
+    box-shadow: -15px 0 15px -15px inset;
+      position : fixed;
+      
+      margin-top : 25px;
+  
+      left : 0;
+  transform: translateX(0);
+  }
+  }
+  @media(min-width: 425px) and (max-width: 768px){
+  
+  .setsidebaropen{
+    background-color: rgb(255, 255, 255);
+    width : 100%;
+    height : 100%;
+    box-shadow: -15px 0 15px -15px inset;
+      position : fixed;
+      
+      margin-top : 25px;
+  
+      left : 0;
+  transform: translateX(0);
+  
+  }
+}
+  @media(min-width: 768px) and (max-width: 1024px){
+  
+  .setsidebaropen{
+    background-color: rgb(255, 255, 255);
+    width : 50%;
+    height : 100%;
+    box-shadow: -15px 0 15px -15px inset;
+      position : fixed;
+      
+      margin-top : 25px;
+  
+      left : 0;
+  transform: translateX(0);
+  
+  }
+}
+  @media(min-width: 1024px) and (max-width: 1440px){
+  
+  .setsidebaropen{
+    background-color: rgb(255, 255, 255);
+    width : 20%;
+    height : 100%;
+    box-shadow: -15px 0 15px -15px inset;
+      position : fixed;
+      
+      margin-top : 25px;
+  
+      left : 0;
+  transform: translateX(0);
+  
+  }
+  
+    
+}
+
+
+
+@media(min-width: 1440px) and (max-width: 2560px){
+  
+
+  
+    
+}

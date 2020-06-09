@@ -1,0 +1,20 @@
+.bgcolors{
+    background-color: white;
+    height:35px;
+}
+.navbar {
+    background-color: rgb(255, 255, 255);
+    opacity: 1;
+    margin-top: 0%;
+    color: rgba(14, 173, 104, 0.596);
+}
+.coloro
+{
+    color:green;
+}
+.colorContainer
+{
+    background-color: rgba(194, 194, 194, 0.26);
+    width: 100%;
+    height:100px;
+}
