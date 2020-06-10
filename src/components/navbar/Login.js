@@ -44,9 +44,7 @@ class Login extends Component {
     formErrors: {
       password: "",
     },
-    emailError: {
-      email: "",
-    },
+    showemerr: false,
     flag: false,
     chktoken: true,
     handleRegisterstate: false,
@@ -58,40 +56,11 @@ class Login extends Component {
   }
   updateEmail = (e) => {
     e.preventDefault();
-    const { name, value } = e.target;
-    let emailErrors = this.state.emailErrors;
-    console.log("name", name);
+
+    const { Email, value } = e.target;
+    console.log("Email", Email);
     console.log("value", value);
-
-    switch (name) {
-      case "email":
-        if (value.length <= 5) {
-          emailErrors.email = "Write correct email please";
-
-          // this.setState({ flag: false });
-          this.setState({ makedis: true });
-        } else {
-          `${(this.state.emailflag = true)}
-            
-            ${(this.state.emailErrors.email = "")}
-            
-            `;
-          this.setState({ email: e.target.value });
-          this.setState({ makedis: false });
-        }
-        break;
-      default:
-        break;
-    }
-
-    this.setState({ emailErrors, [name]: value }, () => {
-      console.log("state chaangeeee", this.state.emailErrors);
-    });
-
-    // const { Email, value } = e.target;
-    // console.log("Email", Email);
-    // console.log("value", value);
-    // this.setState({ Email: e.target.value });
+    this.setState({ Email: e.target.value });
   };
 
   // handleClose = () => setShow(false);
@@ -167,7 +136,10 @@ class Login extends Component {
     e.preventDefault();
 
     // console.log("Email is settt", this.state.Email);
-
+    if (this.state.Email.length == 0) {
+      this.setState({ showemerr: true });
+      return "error";
+    }
     const finaldata = {
       password: this.state.password,
 
@@ -199,7 +171,13 @@ class Login extends Component {
 
   render() {
     console.log("Hi");
-    let makedis = this.state.makedis;
+    let emptymsg;
+    if (this.state.showemerr) {
+      emptymsg = (
+        <span style={{ color: "red" }}>Email field can never be empty</span>
+      );
+      let makedis = this.state.makedis;
+    }
 
     if (this.state.LoggedIn) {
       console.log("bye");
@@ -250,6 +228,7 @@ class Login extends Component {
                   onChange={this.updateEmail.bind(this)}
                   autoComplete="off"
                 />
+                {emptymsg}
 
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.

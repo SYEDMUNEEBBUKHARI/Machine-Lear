@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ReactDOM from "react-dom";
 
 import { Modal, Button, Col, Form } from "react-bootstrap";
 
@@ -18,7 +19,7 @@ class Register extends Component {
     showsign: false,
     showRegister: false,
     showco: true,
-    password: null,
+    password: "",
     showcomponent: false,
 
     buffer: "",
@@ -34,8 +35,10 @@ class Register extends Component {
       password: "",
     },
     flag: false,
+    makedis: "",
+    makeflag: false,
   };
-
+  componentDidMount() {}
   updateName = (e) => {
     e.preventDefault();
     const { Name, value } = e.target;
@@ -86,6 +89,19 @@ class Register extends Component {
   SubmitData5(e) {
     console.log("buffer datatdatdtadtatdtadtatd", this.state.buffer);
     e.preventDefault();
+    ReactDOM.findDOMNode(this.messageForm).reset();
+    if (
+      this.state.City === "" ||
+      this.state.Country === "" ||
+      this.state.Email === "" ||
+      this.state.password === "" ||
+      this.state.buffer.length === 0
+    ) {
+      this.setState({ makeflag: true });
+      return "fields can never be empty";
+    } else {
+      this.setState({ makedis: "on" });
+    }
     ipfs.files.add(this.state.buffer, (error, result) => {
       if (error) {
         console.error("error");
@@ -110,7 +126,7 @@ class Register extends Component {
         ipfsHash: this.state.ipfsHash,
       };
 
-      axios.post("/api/add", finaldata).then((res) => {
+      axios.post("http://localhost:5000/api/add", finaldata).then((res) => {
         console.log(res.data);
       });
 
@@ -139,6 +155,10 @@ class Register extends Component {
   };
 
   render() {
+    let message;
+    if (this.state.makeflag) {
+      message = <span style={{ color: "red" }}>Fields can never be empty</span>;
+    }
     return (
       <React.Fragment>
         <Modal show={this.state.showco} className="setLogin">
@@ -148,7 +168,12 @@ class Register extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={this.SubmitData5}>
+            <Form
+              onSubmit={this.SubmitData5}
+              id="myForm"
+              className="form"
+              ref={(form) => (this.messageForm = form)}
+            >
               <Form.Row>
                 <Form.Group as={Col}>
                   <Form.Label>Name</Form.Label>
@@ -163,7 +188,7 @@ class Register extends Component {
                   <Form.Label>Image</Form.Label>
                   <Form.Control
                     type="file"
-                    placeholder="Password"
+                    placeholder="Image"
                     onChange={this.captureFile}
                   />
                 </Form.Group>
@@ -217,8 +242,16 @@ class Register extends Component {
                   />
                 </Form.Group>
               </Form.Row>
-
-              <Button variant="primary" className="chkbtn" type="submit">
+              <Form.Row>
+                {" "}
+                <span>{message}</span>
+              </Form.Row>
+              <Button
+                variant="primary"
+                className="chkbtn"
+                type="submit"
+                disabled={this.state.makedis}
+              >
                 Submit
               </Button>
             </Form>

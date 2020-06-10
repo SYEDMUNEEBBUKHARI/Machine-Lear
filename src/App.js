@@ -53,14 +53,12 @@ class App extends Component {
             </div>
           ) : (
             <React.Fragment>
-              <div className="reddd">
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route path="/dashboard" component={Auth} />
-                  <Route path="/companyportal" component={Company} />
-                  <Route path="/cityviewportal" component={CityViewArrange} />
-                </Switch>
-              </div>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/dashboard" component={Auth} />
+                <Route path="/companyportal" component={Company} />
+                <Route path="/cityviewportal" component={CityViewArrange} />
+              </Switch>
             </React.Fragment>
           )}
         </Sylee>
