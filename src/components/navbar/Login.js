@@ -9,6 +9,7 @@ import Register from "./Register";
 import { browserHistory } from "react-router";
 
 import { Router, Redirect } from "react-router-dom";
+import Errorpop from "./errpop";
 
 // import "../navbar/login.css"
 const formvalid = (formErrors) => {
@@ -48,6 +49,8 @@ class Login extends Component {
     flag: false,
     chktoken: true,
     handleRegisterstate: false,
+    errornotfound: "",
+    errflag: false,
   };
   componentDidMount() {
     this.setState({ Email: "" });
@@ -132,11 +135,11 @@ class Login extends Component {
     });
   };
 
-  async SubmitData55(e) {
+  SubmitData55(e) {
     e.preventDefault();
 
     // console.log("Email is settt", this.state.Email);
-    if (this.state.Email.length == 0) {
+    if (this.state.Email.length === 0) {
       this.setState({ showemerr: true });
       return "error";
     }
@@ -149,7 +152,7 @@ class Login extends Component {
     // var that=this;
 
     console.log("calling api");
-    const token = await axios
+    const token = axios
       .post("http://localhost:5000/api/login", finaldata)
 
       .then((res) => {
@@ -158,18 +161,31 @@ class Login extends Component {
         localStorage.setItem("Email", res.data.Email);
         localStorage.setItem("Name", res.data.Name);
         localStorage.setItem("Count", res.data.Count);
-      })
-      .then((result) => {});
+        this.setState({ LoggedIn: true });
+      }).catch((err) => {
+        // what now?
 
-    this.setState({ LoggedIn: true });
+        console.log("error", err.response.data);
+
+        this.setState({ errflag: true });
+
+
+      });
+
+
 
     console.log("that", this.state.Emaili);
 
     console.log("tokeeennnnn", token);
     // localStorage.setItem("token", token);
   }
+  close = () => {
+    this.setState({ errflag: false });
+  };
 
   render() {
+
+
     console.log("Hi");
     let emptymsg;
     if (this.state.showemerr) {
@@ -177,6 +193,10 @@ class Login extends Component {
         <span style={{ color: "red" }}>Email field can never be empty</span>
       );
       let makedis = this.state.makedis;
+    }
+    let chkdata;
+    if (this.state.errflag) {
+      chkdata = <span style={{ color: "red" }}>Email or password is not correct</span>
     }
 
     if (this.state.LoggedIn) {
@@ -203,11 +223,13 @@ class Login extends Component {
 
     return (
       <React.Fragment>
+        <span style={{ backgroundColor: 'black' }}>{this.state.errornotfound}</span>
         <Modal
           show={this.state.showsign}
           onHide={() => this.setState({ showsign: false })}
           className=" setLogin"
         >
+
           <Modal.Header bsPrefix="modal-header" className="d-block">
             <Modal.Title>
               <MdPerson className="signup2" /> Sign-in
@@ -254,6 +276,9 @@ class Login extends Component {
                   <span className="MakeGreen">oka</span>
                 )}
               </Form.Group>
+              <Form.Group>
+                {chkdata}
+              </Form.Group>
 
               <Button
                 variant="primary"
@@ -263,6 +288,7 @@ class Login extends Component {
               >
                 Submit
               </Button>
+              <span style={{ color: "red" }}>{this.state.errornotfound}</span>
             </Form>
           </Modal.Body>
           <Modal.Footer>

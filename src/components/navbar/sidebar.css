@@ -13,6 +13,7 @@ box-shadow: -15px 0 15px -15px inset;
  z-index: 200;
 
 }
+
 ul{
   list-style-type: none;
   text-decoration: none;
@@ -110,11 +111,11 @@ li a:hover {
   width : 20%;
   height : 100%;
   box-shadow: -15px 0 15px -15px inset;
-    position : fixed;
+  position : fixed;
     
-    margin-top : 25px;
+  margin-top : 25px;
 
-    left : 0;
+  left : 0;
 transform: translateX(0);
 
 }

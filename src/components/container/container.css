@@ -162,4 +162,7 @@
 }
 
 @media (min-width: 1440px) and (max-width: 2560px) {
+  img.offset-3 {
+    margin-left: 315px;
+  }
 }

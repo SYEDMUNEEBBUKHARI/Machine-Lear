@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-import { Button, Navbar } from "react-bootstrap";
+
+import { Button, Navbar, Form, Nav } from "react-bootstrap";
 import { TiThMenu } from "react-icons/ti";
 import { MdPerson } from "react-icons/md";
 
@@ -9,7 +9,7 @@ import Backdrop from "../navbar/backdrop";
 import Sdraw from "./sidedraw";
 
 import SideMod from "../navbar/signupmod";
-import "../navbar/navbar.css";
+
 import axios from "axios";
 import ipfs from "../../ipfs";
 import Login from "./Login";
@@ -234,7 +234,7 @@ Password: ${this.state.password}
 
     let logind;
     if (this.state.showcomponent) {
-      logind = <Login click={this.makefalse} />;
+      logind = <Login click={this.makefalse} click2={this.showComponentHandler} />;
     }
 
     let signmodel;
@@ -243,7 +243,7 @@ Password: ${this.state.password}
     }
     return (
       <React.Fragment>
-        <Navbar fixed="top" collapseOnSelect expand="xxl">
+        <Navbar fixed="top" className="makepaddingnone" style={{ paddingRight: 'none' }} collapseOnSelect expand="xxl" >
           {backdraw}
 
           <Button
@@ -253,19 +253,20 @@ Password: ${this.state.password}
           >
             <TiThMenu className="iconsy" />
           </Button>
-          <Navbar.Collapse id="responsive-navbar-nav"></Navbar.Collapse>
+
 
           <Sdraw show={this.state.showsidedraw} />
-
-          <div>
+          <Nav className="mr-auto"></Nav>
+          <Form inline>
             <Button
               bsPrefix="btnsetting "
               className="btnsetting border border-dark"
               onClick={this.showComponentHandler}
+              style={{ padding: 'none' }}
             >
-              <MdPerson className="signup" /> Sign-in
+              <MdPerson className="signup" /> &nbsp; Sign-in
             </Button>
-          </div>
+          </Form>
 
           {logind}
         </Navbar>

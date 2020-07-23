@@ -3,16 +3,16 @@ import LandAbi from "../LandAbi";
 import web3 from "../web3";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ViewLand from "./vieLand";
-import {GoChevronDown} from "react-icons/go";
+import { GoChevronDown } from "react-icons/go";
 import { Col, Row, Button, Dropdown, Container, Navbar, Card } from 'react-bootstrap';
 import { TiThMenu } from "react-icons/ti";
 import socket from "socket.io-client";
 import { Switch, Route, Router as Router } from "react-router-dom"
 import history from '../Services/history';
-import {AiOutlineBell} from "react-icons/ai";
+import { AiOutlineBell } from "react-icons/ai";
 
 import socketIOClient from 'socket.io-client';
-import "./dashboard.css";         
+import "./dashboard.css";
 import axios from 'axios';
 import RegistrationOnBlockchain from "./RegisterLand";
 
@@ -40,11 +40,11 @@ class dashboard extends Component {
             response: 0,
             endpoint: "http://127.0.0.1:5000",
             Count: "",
-            notification:"",
-            notificationLength:"",
+            notification: "",
+            notificationLength: "",
             makered: false,
-            how:"",
-            Acoount:""
+            how: "",
+            Acoount: ""
 
         }
     }
@@ -52,13 +52,16 @@ class dashboard extends Component {
 
 
     async componentDidMount() {
-        const account= await web3.eth.getAccounts;
+        const account = await web3.eth.getAccounts;
 
- this.setState({how: [ {approvedUser:"oooo",
-    whoapprove: "))))",
-    Landid: "jjjj",
-    time:  "p0p0p0"
-    }]});
+        this.setState({
+            how: [{
+                approvedUser: "oooo",
+                whoapprove: "))))",
+                Landid: "jjjj",
+                time: "p0p0p0"
+            }]
+        });
         const Email = localStorage.getItem("Email");
         const Name = localStorage.getItem("Name");
         const ipfsHash = localStorage.getItem("ipfsHash");
@@ -69,100 +72,99 @@ class dashboard extends Component {
             Named: Name,
             ipfsHashd: ipfsHash,
             Count: Count
-            
+
 
 
         });
-        
-       this.setState({Acoount: account[0]});
-        const socket = socketIOClient(this.state.endpoint);
-        socket.on("SendApprovedata",async (data)=>{
-            var Acc=  await web3.eth.getAccounts();
-            
-            console.log("data set app",data);
-            console.log("data set appii",data[0].approvedUser);
-            console.log("account",Acc[0]);
-            
 
-            if(data[0].approvedUser==Acc[0])
-            {
+        this.setState({ Acoount: account[0] });
+        const socket = socketIOClient(this.state.endpoint);
+        socket.on("SendApprovedata", async (data) => {
+            var Acc = await web3.eth.getAccounts();
+
+            console.log("data set app", data);
+            console.log("data set appii", data[0].approvedUser);
+            console.log("account", Acc[0]);
+
+
+            if (data[0].approvedUser == Acc[0]) {
                 const finaldata = {
-        
+
                     FromUser: data[0].whoapprove,
                     ToUser: data[0].approvedUser,
                     LandId: data[0].Landid
                 }
                 axios.post("http://localhost:5000/Register/addNotification", finaldata).
-                then(res=>{console.log(res.data)});
-                
-                  console.log("you have a notification");
-                  this.notification();
-                  localStorage.setItem("Notification", data);
-                  this.notification();
+                    then(res => { console.log(res.data) });
+
+                console.log("you have a notification");
+                this.notification();
+                localStorage.setItem("Notification", data);
+                this.notification();
             }
             console.log("SendApproverdata", data);
-        
-        
+
+
         });
 
-         var result = await LandAbi.methods.landInfoOwner("0x7deddbeee2923bb35d0990c8f66cc70c7ebcfb6d756c63bc7b3abe44159adbf7").call();
+        var result = await LandAbi.methods.landInfoOwner("0x7deddbeee2923bb35d0990c8f66cc70c7ebcfb6d756c63bc7b3abe44159adbf7").call();
         // console.log("result", result);
-        
+
         // console.log("Accounts", account);
 
-        
-        socket.on("outgoing data", data => console.log("ist",data));
+
+        socket.on("outgoing data", data => console.log("ist", data));
         await window.ethereum.enable();
-       
+
         // console.log("ACCo", Acc);
-     
-    this.notification();
-//  console.log("data",da);
+
+        this.notification();
+        //  console.log("data",da);
+
 
     }
 
 
 
-    async notification(){
+    async notification() {
         console.log("calledd");
-        var Acc= await web3.eth.getAccounts();
-        const da= await LandAbi.methods.Landnotification().call({from: Acc[0]});
-        this.setState({notification: da});
-        
-        const lengthnoti=da.length;
-        if(lengthnoti>0)
-        {
-            this.setState({makered: true});
-       
+        var Acc = await web3.eth.getAccounts();
+        const da = await LandAbi.methods.Landnotification().call({ from: Acc[0] });
+        this.setState({ notification: da });
+
+        const lengthnoti = da.length;
+        if (lengthnoti > 0) {
+            this.setState({ makered: true });
+
         }
-        this.setState({notificationLength: lengthnoti});
-        console.log("noti length",this.state.notificationLength);
+        this.setState({ notificationLength: lengthnoti });
+        console.log("noti length", this.state.notificationLength);
     }
 
 
 
-   
-   
-   
-   
-   
-    FetchNotification=()=>{
-        
-        axios.get('http://localhost:9000/fetch',{
-            data:{
+
+
+
+
+
+    FetchNotification = () => {
+
+        axios.get('http://localhost:5000/fetch', {
+            data: {
                 id: 0x7818f4Cf57Be909789c6922ACca491B5b9431e5D
             }
         })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
-          .finally(function () {
-            // always executed
-          });  
-        
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+
 
     }
 
@@ -177,7 +179,7 @@ class dashboard extends Component {
 
     drawerclickhand = (prevstate) => {
 
-        console.log("how",this.state.how[0].approvedUser);
+        console.log("how", this.state.how[0].approvedUser);
 
         // const socket = socketIOClient(this.state.endpoint);
         // socket.emit("incoming data", "coolcup");
@@ -214,22 +216,21 @@ class dashboard extends Component {
 
 
     render() {
-        let takebell="iconbell";
-        if(this.state.makered)
-        {
-            takebell="iconred";
+        let takebell = "iconbell";
+        if (this.state.makered) {
+            takebell = "iconred";
 
         }
         let sidebar;
         let showflex = 'setflex';
         if (this.state.showdrawer) {
-            sidebar = < Drawer click = { 'setAlign' }
+            sidebar = < Drawer click={'setAlign'}
             />;
             showflex = 'setflexx';
 
         } else {
 
-            sidebar = < Drawer click = { 'setAlig' }
+            sidebar = < Drawer click={'setAlig'}
             />;
 
         }
@@ -242,142 +243,142 @@ class dashboard extends Component {
 
         console.log(this.props);
         if (this.state.loggin) {
-            return <Route path = "/"
-            component = { App }
+            return <Route path="/"
+                component={App}
             />
 
         }
 
-        return ( 
-        <Router history = { history } >
+        return (
+            <Router history={history} >
 
 
-            <React.Fragment >
+                <React.Fragment >
 
-            < Switch >
+                    < Switch >
 
-            < Route exact path = "/"
-            component = { App }
-            />
-
-
-
-            </Switch> 
-            <Container >
-
-            < Navbar fixed = "top" collapseOnSelect expand = "xxl" >
-
-            < Button bsPrefix = "chkbtn" position = "fixed" onClick = { this.drawerclickhand } > < TiThMenu className = "iconsy" / > </Button>
-               
-               
-        <a style={{color: 'white',cursor:'pointer'}} onClick={this.FetchNotification} className="makenote offset-md-9 offset-3"><AiOutlineBell className={takebell} /><sup>{this.state.notificationLength}</sup>Notification</a>
-        <span style={{color:'white'}}> |  </span> 
-
-            <div class="dropdown">
-  <button class="dropbtnnn">Welcome { this.state.Named }<GoChevronDown style={{color: 'white'}} /></button>
-  <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a onClick = { this.runLogout } style={{color: 'black', cursor:'pointer'}} >Logout</a>
-  </div>
-</div>
-            
+                        < Route exact path="/"
+                            component={App}
+                        />
 
 
 
-            </Navbar>   </Container>
+                    </Switch>
+                    <Container >
+
+                        < Navbar fixed="top" collapseOnSelect expand="xxl" >
+
+                            < Button bsPrefix="chkbtn" position="fixed" onClick={this.drawerclickhand} > < TiThMenu className="iconsy" /> </Button>
 
 
-    
-            { sidebar }
+                            <a style={{ color: 'white', cursor: 'pointer' }} onClick={this.FetchNotification} className="makenote offset-md-9 offset-3"><AiOutlineBell className={takebell} /><sup>{this.state.notificationLength}</sup>Notification</a>
+                            <span style={{ color: 'white' }}> |  </span>
 
-            <div className = { showflex } >
-            <Container className = "makeDiv" >
+                            <div class="dropdown">
+                                <button class="dropbtnnn">Welcome {this.state.Named.slice(0, 5)}<GoChevronDown style={{ color: 'white' }} /></button>
+                                <div class="dropdown-content">
+                                    <a href="#">Link 1</a>
+                                    <a href="#">Link 2</a>
+                                    <a onClick={this.runLogout} style={{ color: 'black', cursor: 'pointer' }} >Logout</a>
+                                </div>
+                            </div>
 
 
 
-            <Row >
-            <Col md = { 4 } >
 
-            <Card style = {
-                { width: '15rem' } } >
-            <Card.Img variant = "top"
-            src = { Isi }
-            style = {
-                { height: '10rem' } }
-            /> <Card.Body >
+                        </Navbar>   </Container>
 
-            <Card.Text >
-            Connected Users { this.state.Count } </Card.Text>
 
-            </Card.Body> </Card >  </Col>
 
-            <
-            Col md = { 4 } > < Card style = {
-                { width: '15rem' } } >
+                    {sidebar}
 
-            <
-            iframe width = "240"
-            height = "160"
-            src = "http://www.youtube.com/embed/_BIsffqaW1M"
-            allowFullScreen = "true"
-            webkitallowfullscreen = "true"
-            mozallowfullscreen = "true" >
-            </iframe>
+                    <div className={showflex} >
+                        <Container className="makeDiv" >
 
-            <Card.Body >
 
-            <Card.Text >
-            What is BlockChain ?
+
+                            <Row >
+                                <Col md={4} >
+
+                                    <Card style={
+                                        { width: '15rem' }} >
+                                        <Card.Img variant="top"
+                                            src={Isi}
+                                            style={
+                                                { height: '10rem' }}
+                                        /> <Card.Body >
+
+                                            <Card.Text >
+                                                Connected Users {this.state.Count} </Card.Text>
+
+                                        </Card.Body> </Card >  </Col>
+
+                                <
+                                    Col md={4} > < Card style={
+                                        { width: '15rem' }} >
+
+                                        <
+                                            iframe width="240"
+                                            height="160"
+                                            src="http://www.youtube.com/embed/_BIsffqaW1M"
+                                            allowFullScreen="true"
+                                            webkitallowfullscreen="true"
+                                            mozallowfullscreen="true" >
+                                        </iframe>
+
+                                        <Card.Body >
+
+                                            <Card.Text >
+                                                What is BlockChain ?
             </Card.Text>
 
-            </Card.Body> 
-            </Card>
-            </Col >
+                                        </Card.Body>
+                                    </Card>
+                                </Col >
 
-            <
-            Col md = { 4 } > < Card style = {
-                { width: '15rem' } } >
-            <
-            Card.Img variant = "top"
-            src = { Bl }
-            style = {
-                { height: '10rem' } }
-            /> < Card.Body >
+                                <
+                                    Col md={4} > < Card style={
+                                        { width: '15rem' }} >
+                                        <
+                                            Card.Img variant="top"
+                                            src={Bl}
+                                            style={
+                                                { height: '10rem' }}
+                                        /> < Card.Body >
 
-            <Card.Text >
-            How it Works!
+                                            <Card.Text >
+                                                How it Works!
             </Card.Text>
 
-            </Card.Body> </Card></Col >
+                                        </Card.Body> </Card></Col >
 
-            </Row>
+                            </Row>
 
 
             555
 
-           
-            
+
+
             <ViewLand />
-            {/* <BuyLand />
+                            {/* <BuyLand />
 
             <RegistrationOnBlockchain /> */}
-            </Container>
-
-            
-            </div>
+                        </Container>
 
 
+                    </div>
 
 
 
 
-     
 
 
 
 
-            </React.Fragment> </Router>
+
+
+
+                </React.Fragment> </Router>
 
         );
     }

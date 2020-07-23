@@ -66,6 +66,8 @@ class Approvepop extends Component {
     } else {
       console.log("Transaction succesful");
       this.setState({ red: true });
+
+
       socket.emit("Approved", [
         {
           approvedUser: this.props.click2,
@@ -74,6 +76,15 @@ class Approvepop extends Component {
           time: new Date(),
         },
       ]);
+      axios.post('http://localhost:5000/api/addNotificationn', {
+        "data": [{
+          approvedUser: this.props.click2,
+          whoapprove: Acc[0],
+          Landid: this.state.Landid,
+          time: new Date(),
+        }]
+      });
+
 
       socket.on("SendApprovedata", (data) => {
         console.log("SendApproverdata", data);

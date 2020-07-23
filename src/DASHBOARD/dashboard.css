@@ -1,3 +1,7 @@
+
+
+
+
 .btncolor{
     
     border-color: #0EAD69 !important;
@@ -64,13 +68,9 @@ color: #0EAD69;
         background-color: rgba(0, 36, 24, 0);
 
         width: 100%;
-        /* border: solid 1px black; */
+       
         box-shadow: 0px 5px 5px #2c914580;
-        /* padding-top: 20%;
-        padding-bottom: 50%;
-        padding-left: 30%;
-        padding-right:30%;
-        border-radius: 25px; */
+       
 
     }
     

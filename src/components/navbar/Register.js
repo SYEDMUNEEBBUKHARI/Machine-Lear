@@ -37,8 +37,11 @@ class Register extends Component {
     flag: false,
     makedis: "",
     makeflag: false,
+    messagesucess: false,
+    errflag: false,
+    datasuccess: false
   };
-  componentDidMount() {}
+  componentDidMount() { }
   updateName = (e) => {
     e.preventDefault();
     const { Name, value } = e.target;
@@ -127,7 +130,16 @@ class Register extends Component {
       };
 
       axios.post("http://localhost:5000/api/add", finaldata).then((res) => {
-        console.log(res.data);
+        console.log("responsssss", res.data);
+        this.setState({ datasuccess: true });
+      }).catch((err) => {
+        // what now?
+
+        console.log("error", err);
+
+        this.setState({ errflag: true });
+
+
       });
 
       this.setState({
@@ -159,9 +171,16 @@ class Register extends Component {
     if (this.state.makeflag) {
       message = <span style={{ color: "red" }}>Fields can never be empty</span>;
     }
+    if (this.state.errflag) {
+      message = <span style={{ color: "red" }}>Error terminate Registration</span>
+    }
+
+    if (this.state.datasuccess) {
+      message = <span style={{ color: "green" }}>Register Successfully</span>
+    }
     return (
       <React.Fragment>
-        <Modal show={this.state.showco} className="setLogin">
+        <Modal show={this.state.showco} onHide={() => this.setState({ showco: false })} className="setLogin">
           <Modal.Header bsPrefix="modal-header " className="d-block">
             <Modal.Title>
               <MdPerson className="signup2" /> Register

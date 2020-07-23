@@ -1,19 +1,21 @@
-import React,{Component} from 'react';
-import  "./Drawer.css"
+import React, { Component } from 'react';
+import "./Drawer.css"
 
-import {AiOutlineFileSearch} from "react-icons/ai"
-import {FiSettings} from "react-icons/fi"
-import {GiIsland} from "react-icons/gi";
-import {AiOutlineDashboard} from "react-icons/ai"
-import {FaPagelines} from "react-icons/fa"
+import { AiOutlineFileSearch } from "react-icons/ai"
+import { FiSettings } from "react-icons/fi"
+import { GiIsland } from "react-icons/gi";
+import { AiOutlineDashboard } from "react-icons/ai"
+import { FaPagelines } from "react-icons/fa"
 import Buyer from "./buypop/Buypop";
+import LandReg from "../DASHBOARD/DashRegister/MakepopforLand";
 
-class Drawer extends Component{
- state={
-     flag: false
- }
+class Drawer extends Component {
+    state = {
+        flag: false,
+        Landdata: false
+    }
 
-     ColoredLine = ({ color }) => (
+    ColoredLine = ({ color }) => (
         <hr
             style={{
                 color: color,
@@ -23,58 +25,63 @@ class Drawer extends Component{
         />
     );
 
-clickfunc=()=>{
-    console.log("clicked");
-    this.setState({flag: true});
-}
-close=()=>{
-    this.setState({flag: false});
-
-}
-render(){
-    let sh;
-if(this.state.flag)
-{
-sh=<Buyer  click={()=>this.close()} />;
-}
-    return(
-        
+    clickfunc = () => {
+        console.log("clicked");
+        this.setState({ flag: true });
+    }
+    landfunc = () => {
+        console.log("clicked");
+        this.setState({ Landdata: true });
+    }
 
 
+    makeclose = () => {
+        this.setState({ Landdata: false });
 
+    }
+    close = () => {
+        this.setState({ flag: false });
 
-       
-<div className={this.props.click}>
+    }
+    render() {
+        let sh;
+        if (this.state.flag) {
+            sh = <Buyer click={() => this.close()} />;
+        }
 
-<br></br>
-<br></br>
-
-
-{sh}
-
-
-<a className="adjust" href=""><AiOutlineDashboard  className="adjustColors" /> <span className="dishide">  Dashboard </span> </a> <br></br>
-<hr />
-
-    <a className="adjust "  style={{cursor:'pointer'}} onClick={()=>this.clickfunc()}><FaPagelines  className="adjustColors"  />  <span className="dishide"> Buy Land </span>  </a>  <br></br>
-<hr />
-
-<a className="adjust " href="" ><AiOutlineFileSearch className="adjustColors"  /> <span className="dishide">Request Status</span>  </a>   <br></br>
-<hr />
-
-<a className="adjust "  href="#viewLand"><GiIsland className="adjustColors"  /> <span className="dishide"> Lands for sale  </span>     </a> <br></br>
-<hr />
-
-<a className="adjust "  href=""><FiSettings className="adjustColors"  />  <span className="dishide">Settings </span>  </a>  <br></br>
+        let Landd;
+        if (this.state.Landdata) {
+            Landd = <LandReg makeclose={() => this.makeclose()} />;
+        }
+        return (
 
 
 
 
 
 
+            <div className={this.props.click}>
+
+                <br></br>
+                <br></br>
+
+                {Landd}
+                {sh}
 
 
-</div>
+                <a className="adjust" href=""><AiOutlineDashboard className="adjustColors" /> <span className="dishide">  Dashboard </span> </a> <br></br>
+                <hr />
+
+                <a className="adjust " style={{ cursor: 'pointer' }} onClick={() => this.clickfunc()}><FaPagelines className="adjustColors" />  <span className="dishide"> Buy Land </span>  </a>  <br></br>
+                <hr />
+
+                <a className="adjust " style={{ cursor: 'pointer' }} onClick={() => this.landfunc()} ><AiOutlineFileSearch className="adjustColors" /> <span className="dishide">Register Land</span>  </a>   <br></br>
+                <hr />
+
+                <a className="adjust " href="#viewLand"><GiIsland className="adjustColors" /> <span className="dishide"> Lands for sale  </span>     </a> <br></br>
+                <hr />
+
+                <a className="adjust " href=""><FiSettings className="adjustColors" />  <span className="dishide">Settings </span>  </a>  <br></br>
 
 
 
@@ -82,8 +89,17 @@ sh=<Buyer  click={()=>this.close()} />;
 
 
 
-    );
-}
+
+            </div>
+
+
+
+
+
+
+
+        );
+    }
 }
 
 

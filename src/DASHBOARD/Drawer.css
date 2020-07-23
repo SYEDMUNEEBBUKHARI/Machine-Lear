@@ -1,3 +1,5 @@
+
+
 .setAlign{
 
 
@@ -454,6 +456,81 @@ overflow: hidden;
       
       .dishide{
         /* position: absolute; */
+        margin-top: 10px;
+        font-size: 35px;
+        position: absolute;
+        padding-left: 35px;
+       
+      }
+      /* merge navbar */
+      .setAlig{
+  
+
+
+        top: 40px;
+        Left: 20px;
+       width: 10%;
+      
+        height: 100%;
+        background-color: rgb(255, 255, 255);
+        padding-top: 0%;
+        padding-bottom: 0%;
+        position: fixed;
+        transform: translateX(-50%);
+        
+     transition: transform 0.3s ease-out;
+     
+    overflow: hidden;
+    
+    
+    }
+
+
+
+.setAlign{
+
+
+    top: 40px;
+    Left: -60px;
+    width: 20%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    padding-top: 0%;
+    padding-bottom: 0%;
+    position: fixed;
+   overflow: hidden;
+   
+   
+}
+    .adjustColors{
+      color:  #0EAD69;
+      font-size: 40px !important;
+      height: auto;
+      margin-left: 20px;
+
+    }
+      
+        
+    }
+
+
+
+
+
+@media(min-width: 2560px) and (max-width: 4000px){
+    
+   .adjust{
+
+        color: green;
+        width: 90% important;
+        height: auto;
+        margin-left: 80px;
+        /* position: absolute !important; */
+    
+      }
+      
+      .dishide{
+        /* position: absolute; */
         font-size: 25px;
         position: absolute;
         padding-left: 25px;
@@ -489,13 +566,9 @@ overflow: hidden;
     }
       
         
-    }
-
-
-
-
-
-
+    
+      
+  }
 
 
 

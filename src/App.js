@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Nave from "../src/components/navbar/navbar";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 // import{Route,Router} from 'react-router'
 import "./App.css";
 import Cont from "../src/components/container/contaner";
 import Io from "../src/components/io/io";
 import styled from "styled-components";
 import CityViewArrange from "./DASHBOARD/Cityportal/CityViewArrange";
-import "../node_modules/font-awesome/css/font-awesome.min.css";
+
 import Foott from "../src/components/footer/footer";
 
 // import axios from 'axios'
@@ -26,11 +26,7 @@ import { Router, Redirect } from "react-router-dom";
 import Routes from "./Routes";
 import Company from "./DASHBOARD/company";
 import history from "./Services/history";
-const Sylee = styled.div`
-  .reddd {
-    background-color: black;
-  }
-`;
+
 class App extends Component {
   state = {
     loading: true,
@@ -46,22 +42,25 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <Sylee>
-          {this.state.loading ? (
-            <div className="load">
-              <Cube color="#0EAD69" />
-            </div>
-          ) : (
+
+        {this.state.loading ? (
+          <div className="load">
+            <Cube color="#0EAD69" />
+          </div>
+        ) : (
             <React.Fragment>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/dashboard" component={Auth} />
                 <Route path="/companyportal" component={Company} />
                 <Route path="/cityviewportal" component={CityViewArrange} />
+                <Route exact path="/sign-in" component={Home} />
+                <Route exact path="/Register" component={Home} />
+
               </Switch>
             </React.Fragment>
           )}
-        </Sylee>
+
       </Router>
     );
   }

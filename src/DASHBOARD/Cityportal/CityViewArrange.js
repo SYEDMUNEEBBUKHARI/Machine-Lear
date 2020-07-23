@@ -17,6 +17,8 @@ import CityMap from "./cityMAp";
 import {Form,Button} from 'react-bootstrap'
 import ApproverWindow from "./ApproveLand";
 import {MdVerifiedUser} from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
+import { FiCopy } from "react-icons/fi";
 class CityViewArrange extends Component{
 
 state={ 
@@ -33,11 +35,33 @@ state={
     Account:"",
     searchid:"",
     test:[],
-    approvewindow: false
+    approvewindow: false,
+    copstatus:false,
+    collectLandindata:[],
+    counter:0
 
 
 }
+  LandFunction = (da) => {
+    this.setState({ copstatus: true });
+    this.setState({ copid: da });
 
+    console.log("counti", da);
+    var out = document.getElementById(da);
+
+    out.select();
+    document.execCommand("copy");
+
+
+
+  }
+
+  async verifydata(Cnic,serial){
+    console.log("verify");
+    const csdata={Cnic: Cnic, serial: serial};
+   const dataa=await axios.get(`http://localhost:5000/api/VerifytheLand?id=${serial}&cnic=${Cnic}`);
+console.log("found or not",dataa.data.length);
+  }
 
 submitdataapprove=this.submitdataapprove.bind(this);
 
@@ -67,8 +91,21 @@ showComponentHandler(data){
              });
            }
 async componentDidMount(){
-     
-  var Ac= await web3.eth.getAccounts();
+  let id=5;
+ const ax= await axios.get("http://localhost:5000/api/fetchdataLandTobe?id=5");
+ 
+ console.log("ax",ax.data);
+  let axvalue = [...this.state.collectLandindata];
+  
+
+  ax.data.map((item)=>{
+    console.log("::item",item);
+    axvalue.push({ value: item });
+  })
+  
+  this.setState({ collectLandindata:axvalue});
+  console.log("this.", this.state.collectLandindata);
+ var Ac= await web3.eth.getAccounts();
   console.log("AC", Ac);
   this.setState({Account: Ac[0]});
     const city=window.localStorage.getItem('CompanyCity');
@@ -176,6 +213,12 @@ updateLandid=(e)=>{
                                {this.setState({showcomponent: false})
                             };
 render(){
+  
+  let copi;
+  if (this.state.copstatus) {
+    copi = <span><FaCheck /></span>;
+
+  }
     if(this.state.logout)
     {
         return <Redirect to="/" />;
@@ -221,7 +264,7 @@ return(
           </div>
           </Navbar> */}
 
-          <Navbar collapseOnSelect expand="lg" bgPrefix="bgcolors"  style={{background: 'rgba(3, 163, 128, 0.363)'}}  fixed="top" >
+          <Navbar collapseOnSelect expand="lg" bgprefix="bgcolors"  style={{background: 'rgba(3, 163, 128, 0.363)'}}  fixed="top" >
           <div className="container">
   <Navbar.Brand href="#home"><span style={{color:'white'}}>  <Image src={Logo}  width= '25px' height='auto'/>SyLand</span></Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -242,10 +285,10 @@ return(
    <button className=" btnsetback" onClick={()=>{this.showApprove()}} ><MdVerifiedUser style={{color: "rgba(21, 247, 149, 0.781)"}} /> Approve The Land</button>
 
    <button className=" btnsetback" onClick={()=>{this.openregisterwindow()}} ><FaWpforms style={{color: "rgba(21, 247, 149, 0.781)"}} /> Register The Land</button>
-
+              <button className=" btnsetback" onClick={() => { this.LogOutview() }} ><IoMdLogOut style={{ color: "rgba(21, 247, 149, 0.781)" }} /> Logout</button>
       {/* <Nav.Link href="#deets">More deets</Nav.Link> */}
-      <Nav.Link eventKey={2} href="#memes">
-   <button className=" btnsetback" onClick={()=>{this.LogOutview()}} ><IoMdLogOut style={{color: "rgba(21, 247, 149, 0.781)"}}/> Logout</button>
+      <Nav.Link eventKey={2} >
+  
         
       </Nav.Link>
       
@@ -269,32 +312,38 @@ return(
 <br></br>
 <br></br>
 
-<h3 style={{textAlign:'center'}}>Lands Information</h3>
+    <h3 style={{ textAlign: 'center' }}><div className=" text-center"> <h4 style={{fontSize:'25px'}} >Registered cities < GiIsland className="islandcolor" /></h4>
+    </div></h3>
 <br></br>
-<div className="textcolor"> <h4 >Registered cities < GiIsland  /></h4>
-               </div>
-<div style={{color:'black'}}><Row style={{width:'100%'}}><Col className="offset-1">Address</Col><Col >Serial No</Col></Row></div>
 
-<Row style={{width:'100%'}}>
-             <Col md={4} >
+
+    <div className="makeregisterlandcenter" >
              
-             <ul className="colorback" >
+             <ul className="colorback text-center" >
            
               
                {
           this.state.test.map(item => (
               
-          <li className="text colorback" style={{color: "#0EAD69 "}}> {this.state.count++}) &nbsp;
-          
-          {
-          
-          item.value[0]} &nbsp; {
-          
-            item.value[2]} 
-             &nbsp; <button className="makebt" onClick={()=>{this.showComponentHandler(item.value[0])}}>view Admin</button> 
-           
-          
-           </li> 
+            <li className="text colorback" style={{ color: "#0EAD69 " }}>
+              <Row><Col md={0.5}>{this.state.count++}</Col> &nbsp;
+          {console.log("saleable", item)}
+                <Col md={4}>{item.value[2]}</Col> &nbsp;
+
+        <Col md={4}><input value={item.value[0]} name="id" id={item.value[0]} style={{ MozBorderRadius: '5px' }} />
+                  <button onClick={() => { this.LandFunction(item.value[0]) }}><FiCopy style={{ color: 'white' }} /></button></Col>
+        &nbsp; {(this.state.copid == item.value[0]) ? copi : null}
+                <Col md={3}>
+                  {item.value[1]}
+                </Col>
+
+
+
+          &nbsp;
+         
+
+              </Row>
+            </li>
          
 
            
@@ -309,35 +358,105 @@ return(
           
           }
         </ul>
-   </Col>
-           
+   
 
-        
-       
+    </div>
+
       
-       </Row>
 
-       
+<div className="dataofLandstoberegistered">
+<div className="landReg">Lands To Be Registered</div>
+</div>
 
-       <Col className="offset-5" md={2}>
-        {/* <h4 style={{textAlign:'center'}} >Approve Land </h4>
-        <Form onSubmit={this.submitdataapprove}>
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label>Enter Land-id</Form.Label>
-    <Form.Control type="Landid" onChange={this.updateLandid.bind(this)} placeholder="Enter Land-Id" />
-    
-  </Form.Group>
 
-  
-  <button variant="primary" className="offset-12 btnchk" type="submit">
-    Submit
-  </button>
-</Form> */}
 
-        
-       
-       </Col>
 {logind}
+<div >
+  <ul>
+        { 
+        
+        
+        this.state.collectLandindata.map(item => (
+          
+
+          <li className="text-center" style={{ color: "black " }}>
+         <div className="backgroundcolorflex">
+
+              <div className="Nameflex"><div className="NameofClient">Name: <span className="fontName">{item.value.Name}</span></div></div>
+              <div className="row aligncol">
+                <div className="col-md-2"></div>
+              <div className="col-md-3">
+                  <span className="clrWhite">Id: </span>  {item.value._id}
+              </div> 
+                <div className="col-md-3">
+                  <span className="clrWhite">MetaMask Id: </span> {item.value.Metamaskid}
+                
+                </div> <div className="col-md-3">
+                  <span className="clrWhite">City: </span>  {item.value.City}
+                </div>
+            </div>
+
+              <div className="row aligncol">
+                <div className="col-md-2"></div>
+                <div className="col-md-3">
+                  <span className="clrWhite">Street-No: </span>  {item.value.StreetNo}
+                </div>
+                <div className="col-md-3">
+                  <span className="clrWhite">Postal-code: </span>  {item.value.Postcode}
+                </div>
+                <div className="col-md-3">
+                  <span className="clrWhite">Serial-No: </span>  {item.value.SerialNo}
+                </div>
+
+            </div>
+              <div className="row aligncol">
+                <div className="col-md-2"></div>
+                <div className="col-md-3">
+                  <span className="clrWhite">Province: </span>  {item.value.Province}
+                </div>
+                <div className="col-md-3">
+                  <span className="clrWhite">Land-No: </span>  {item.value.LandNo}
+                </div>
+                <div className="col-md-3">
+                  <span className="clrWhite">Country: </span>  {item.value.Country}
+                </div>
+
+              </div >
+              <div className="row aligncol">
+                <div className="col-md-2"></div>
+                <div className="col-md-3">
+                  <span className="clrWhite">Land Area: </span>  {item.value.LandArea}
+                </div>
+                <div className="col-md-3">
+                  <span className="clrWhite">CNIC: </span>  {item.value.Cnic}
+                </div>
+                <div className="col-md-3"> <span className="clrWhite">Land Location: </span>  {item.value.LandLocation}</div>
+              </div>
+              <div className="VerifyDel">
+                <div>                <button className="Verify" onClick={()=>this.verifydata(item.value.Cnic, item.value.SerialNo)}>Verify</button></div>
+                <div>                <button className="Delete">Delete</button></div>
+
+              </div>
+            </div>
+            
+           
+          </li>
+         
+
+
+             
+
+
+
+        )
+
+
+
+
+        )}
+  </ul>
+</div>
+
 </React.Fragment>);
 
 }
