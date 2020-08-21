@@ -141,7 +141,7 @@ class mysidebar extends Component {
             <br />
             <br />
 
-            <Row>
+            <Row className="adjMarg">
 
               <Col   >
                 <h4><TiSocialYoutubeCircular className="iconcolor1" /></h4>

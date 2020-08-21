@@ -19,9 +19,11 @@ import ApproverWindow from "./ApproveLand";
 import {MdVerifiedUser} from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
 import { FiCopy } from "react-icons/fi";
+import VerifyResult from "./VerifyResult";
 class CityViewArrange extends Component{
 
 state={ 
+  deleteid:"",
     mycity:[],
     logout:false,
     showregisterwindow: false,
@@ -38,7 +40,14 @@ state={
     approvewindow: false,
     copstatus:false,
     collectLandindata:[],
-    counter:0
+  collectLandin: [],
+
+
+    counter:0,
+    VerifyRes:false,
+    Found:"",
+    delete:false,
+  
 
 
 }
@@ -51,16 +60,57 @@ state={
 
     out.select();
     document.execCommand("copy");
-
+ 
 
 
   }
 
+  
+async OnChain(meta,city,street,post,serial,province,landno,count,landarea){
+
+
+  const transaction = await LandAbi.methods.LandRegistration(landno + " " + street + " " + post + " " + city + " " + province + " " + count, city, landarea, meta, serial).send({
+    from: this.state.Account
+  });
+  if (!transaction) {
+    console.log("Transaction Faild!!!");
+  }
+  else {
+    console.log("Transaction succesful");
+    this.setState({ red: true });
+  }
+
+
+}
+  async onDelete(id){
+    const del = await axios.get(`http://localhost:5000/api/deleteLand?id=${id}`);
+console.log("Delete",del.data._id);
+this.setState({deleteid: del.data._id});
+this.setState({delete:true});
+  }
+
   async verifydata(Cnic,serial){
     console.log("verify");
-    const csdata={Cnic: Cnic, serial: serial};
-   const dataa=await axios.get(`http://localhost:5000/api/VerifytheLand?id=${serial}&cnic=${Cnic}`);
-console.log("found or not",dataa.data.length);
+    const Name="Abdul Mubeen";
+    const csdata={Cnic: Cnic, serial: serial,Name:"Abdul Mubeen"};
+    const dataa = await axios.get(`http://localhost:5000/api/VerifytheLand?serial=${serial}&cnic=${Cnic}&Name=${Name}`);
+console.log("found or not",dataa);
+if(dataa.data.length===0)
+{
+  this.setState({Found: 0});
+  this.setState({VerifyRes:true});
+
+
+}
+else
+{
+  this.setState({ Found: dataa.data.length });
+
+
+}
+this.setState({VerifyRes:true});
+
+
   }
 
 submitdataapprove=this.submitdataapprove.bind(this);
@@ -90,7 +140,24 @@ showComponentHandler(data){
               
              });
            }
+
+           async loadload(){
+             const ax92 = await axios.get("http://localhost:5000/api/fetchdataLandTobe?id=5");
+
+             console.log("ax", ax92.data);
+             let axvalue9 = [...this.state.collectLandin];
+
+
+             ax92.data.map((item) => {
+               console.log("::item", item);
+               axvalue9.push({ value: item });
+             })
+
+             this.setState({ collectLandindata: axvalue9 });
+           }
 async componentDidMount(){
+
+
   let id=5;
  const ax= await axios.get("http://localhost:5000/api/fetchdataLandTobe?id=5");
  
@@ -102,6 +169,8 @@ async componentDidMount(){
     console.log("::item",item);
     axvalue.push({ value: item });
   })
+
+
   
   this.setState({ collectLandindata:axvalue});
   console.log("this.", this.state.collectLandindata);
@@ -184,6 +253,12 @@ showApprove=()=>{
 notshowapprove=()=>{
   this.setState({approvewindow: false});
 }
+
+onClose=()=>{
+  this.setState({VerifyRes: false});
+  this.setState({delete:false});
+  
+}
 async landinfo(data){
   
       const contai=await LandAbi.methods.landInfoOwner(data).call({from: this.state.Account});
@@ -246,9 +321,30 @@ if(this.state.approvewindow)
   approverwind=<ApproverWindow click={()=>{this.notshowapprove()}} />
 }
 
+let verify;
+if(this.state.VerifyRes)
+{
+  if(this.state.Found===0){
+    verify = <VerifyResult len={this.state.Found} data="Data Not Found Delete It" onClose={this.onClose} />;
+}
+  else {
+    verify = <VerifyResult data="found" len={this.state.Found} onClose={this.onClose} />;
+
+  }
+
+}
+
+if(this.state.delete)
+{
+  verify = <VerifyResult data={`delete id ${this.state.deleteid}`} onClose={this.onClose} />;
+this.loadload();
+
+}
+
 return(
 
     <React.Fragment>
+      {verify}
 <div className="makebackground" >
     {/* <Navbar  bgPrefix="bgcolors"  style={{background: 'rgba(3, 163, 128, 0.363)'}}  fixed="top"  collapseOnSelect expand="xxl"   >
             <div className="container">
@@ -434,9 +530,16 @@ return(
               </div>
               <div className="VerifyDel">
                 <div>                <button className="Verify" onClick={()=>this.verifydata(item.value.Cnic, item.value.SerialNo)}>Verify</button></div>
-                <div>                <button className="Delete">Delete</button></div>
+                <div>                <button className="Delete" onClick={()=>this.onDelete(item.value._id)}>Delete</button></div>
+                <div>                <button className="chain" onClick={() => this.OnChain(item.value.Metamaskid, item.value.City, item.value.StreetNo, item.value.Postcode, item.value.SerialNo, item.value.Province, item.value.LandNo, item.value.Country,item.value.LandArea)}>OnChain</button></div>
+
 
               </div>
+
+
+
+
+
             </div>
             
            
@@ -455,6 +558,7 @@ return(
 
         )}
   </ul>
+ 
 </div>
 
 </React.Fragment>);

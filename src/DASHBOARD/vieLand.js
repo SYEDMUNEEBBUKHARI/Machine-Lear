@@ -30,7 +30,8 @@ class Landview extends React.Component {
     lengthcount: [],
     flacount: 0,
     Stan: 1,
-    chansale: false
+    chansale: false,
+    val: 0
   }
 
   LandFunction = (da) => {
@@ -96,6 +97,34 @@ class Landview extends React.Component {
 
 
 
+  async Landupdate() {
+    await window.ethereum.enable();
+    var Acc = await web3.eth.getAccounts();
+    //  console.log("ACCo", Acc);
+    this.setState({ Account: Acc });
+
+    const Asse = await LandAbi.methods.viewAssets().call({ from: Acc[0] });
+    this.setState({ Asset: Asse });
+
+
+    // console.log("Assets",this.Asset);
+    // const endpoint = this.state.endpoint;
+    // const saleableLands= await LandAbi.methods.viewforsale().call({from: Acc[0]});
+    // console.log("saleableLands",saleableLands);
+
+    Asse.map((Asse, i) => (
+      <React.Fragment>{Asse}
+        {
+          this.landinfo(Asse)
+
+        }
+
+      </React.Fragment>
+    ))
+  }
+
+
+
 
   async landinfo(data) {
     var Acc = await web3.eth.getAccounts();
@@ -118,7 +147,7 @@ class Landview extends React.Component {
     }
     else {
       this.setState({ chansale: true });
-
+      this.setState({ val: 1 });
     }
 
     socket.emit("sale", data);
@@ -156,10 +185,14 @@ class Landview extends React.Component {
     this.setState({ flacount: this.state.flacount + 1 });
 
   }
+  makeval = () => {
+    this.setState({ val: 0 });
+  }
   render() {
     let makesa = "Make Saleable";
     if (this.state.chansale) {
       makesa = <span >Become Saleable</span>;
+
 
     }
     let mvp;
@@ -260,7 +293,7 @@ class Landview extends React.Component {
 
         <div style={{ textAlign: 'center' }} id="viewLand">Saleable Lands </div>
 
-        <SaleLand />
+        <SaleLand value={this.state.val} valfun={() => this.makeval()} />
         <ViewRequest />
 
 

@@ -1,0 +1,36 @@
+.note{height:900px;
+width:450px;
+background-color: rgb(240, 240, 240);
+position: absolute;
+z-index:900;
+left:985px;
+top:-25px}
+
+.close{
+    color:black;
+    font-size: 35px;
+    margin-top:85px;
+    margin-left: 75px;;
+}
+
+
+.notelist{
+    color:black;
+    margin-top:65px;
+    
+    height: 500px;
+    width:100%;
+z-index:1000;
+}
+.notelistt{
+    color:black;
+   
+  margin-top: 5px;
+  
+
+
+ 
+}
+.Not{color: green;
+    margin-top: 70px;;
+}

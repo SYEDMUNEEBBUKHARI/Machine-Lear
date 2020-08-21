@@ -10,7 +10,7 @@ import socket from "socket.io-client";
 import { Switch, Route, Router as Router } from "react-router-dom"
 import history from '../Services/history';
 import { AiOutlineBell } from "react-icons/ai";
-
+import Noti5 from "./NotiDis/NotiDisplay";
 import socketIOClient from 'socket.io-client';
 import "./dashboard.css";
 import axios from 'axios';
@@ -19,7 +19,7 @@ import RegistrationOnBlockchain from "./RegisterLand";
 import App from '../App';
 
 import Drawer from "./Drawer";
-
+import WhowillOwn from "./Whoowns/Whoowns";
 import Isi from "../assets/giphy.gif"
 import Bl from "../assets/Bl.gif"
 import BuyLand from "./BuyLand";
@@ -44,7 +44,11 @@ class dashboard extends Component {
             notificationLength: "",
             makered: false,
             how: "",
-            Acoount: ""
+            Acoount: "",
+            collectmoney: [],
+            makenotion: false,
+            k: [],
+
 
         }
     }
@@ -144,26 +148,40 @@ class dashboard extends Component {
 
 
 
+    funvalue(data) {
 
 
 
+    }
+
+    closenote = () => {
+        this.setState({ makenotion: false });
+    }
 
     FetchNotification = () => {
 
-        axios.get('http://localhost:5000/fetch', {
-            data: {
-                id: 0x7818f4Cf57Be909789c6922ACca491B5b9431e5D
-            }
+        axios.get('http://localhost:5000/api/fetch').then((data) => {
+            console.log("data", data.data);
+
+            this.setState({ k: data.data });
+            console.log("stattss", this.state.k);
+            this.setState({ makenotion: true });
+
+
         })
-            .then(function (response) {
-                console.log(response);
-            })
+
             .catch(function (error) {
                 console.log(error);
             })
             .finally(function () {
                 // always executed
+
+
+
             });
+
+        this.setState({ makenotion: true });
+        console.log("data");
 
 
     }
@@ -216,6 +234,10 @@ class dashboard extends Component {
 
 
     render() {
+        let noti5;
+        if (this.state.makenotion) {
+            noti5 = <Noti5 close={() => this.closenote()} data={this.state.k} />;
+        }
         let takebell = "iconbell";
         if (this.state.makered) {
             takebell = "iconred";
@@ -292,9 +314,10 @@ class dashboard extends Component {
 
                     {sidebar}
 
+
                     <div className={showflex} >
                         <Container className="makeDiv" >
-
+                            {noti5}
 
 
                             <Row >
@@ -359,7 +382,7 @@ class dashboard extends Component {
 
 
 
-            <ViewLand />
+                            <ViewLand />
                             {/* <BuyLand />
 
             <RegistrationOnBlockchain /> */}

@@ -47,6 +47,10 @@ contract LandOwnership {
     uint256 count = 0;
     mapping(string => bool) serialexist;
     mapping(string => bytes32[]) companycontainLanid;
+    mapping(bytes32 => address[]) whoowns;
+
+    //     mapping(bytes32 => bytes32[]) whoowns;
+    //  companycontainLanid[city].push(d);
 
     function LandRegistration(
         string memory completeaddress,
@@ -74,7 +78,7 @@ contract LandOwnership {
         Land[d].LandArea = LandArea;
         Land[d].serialNo = d;
         Land[d].city = city;
-
+        whoowns[d].push(metaid);
         companycontainLanid[city].push(d);
         Land[d].Landalreadyornot = d;
         profile[metaid].noOfLand.push(d);
@@ -185,6 +189,10 @@ contract LandOwnership {
         return appnotifi[msg.sender].AddLand;
     }
 
+    function WhoOwns(bytes32 du) public view returns (address[]) {
+        return whoowns[du];
+    }
+
     function BuyLand(bytes32 Landid) public returns (bool) {
         require(
             Land[Landid].BuyersStatus[msg.sender] ==
@@ -194,6 +202,9 @@ contract LandOwnership {
         address previousOwner = Land[Landid].currentOwner;
         Land[Landid].currentOwner = msg.sender;
         uint256 findid = whtidis[Landid];
+
+        whoowns[Landid].push(msg.sender);
+
         //last property
         bytes32 lastproperty = profile[previousOwner]
             .noOfLand[profile[previousOwner].noOfLand.length - 1];

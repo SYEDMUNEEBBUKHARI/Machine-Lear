@@ -95,7 +95,16 @@ border: 1px solid black;
 color: white;
 }
 
+.chain{
+      position: relative;
+left:940px;
+padding:10px 20px 10px 20px;
+border-radius: 5px;
+color: white;
 
+background-color: rgb(255, 174, 0);
+border: 1px solid black;
+}
 
 .Delete{
     position: relative;

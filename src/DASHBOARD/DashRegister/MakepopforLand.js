@@ -112,7 +112,7 @@ class Makepop extends Component {
         buffer: "",
         ipfsHash: "",
 
-
+        Suc: false,
         flag: false,
         chktoken: true,
         handleRegisterstate: false,
@@ -252,9 +252,11 @@ class Makepop extends Component {
         console.log("data", data.City);
 
 
-        axios.post("http://localhost:5000/api/sendlandtocity", data).then((res) => {
+        const d = axios.post("http://localhost:5000/api/sendlandtocity", data).then((res) => {
             console.log("responsssss", res.data);
-            this.setState({ datasuccess: true });
+
+
+
         }).catch((err) => {
             // what now?
 
@@ -264,11 +266,23 @@ class Makepop extends Component {
 
 
         });
+        if (d) {
+            this.setState({ datasuccess: true });
+            this.setState({ Name5: "" });
+            this.setState({ CNIC5: "" });
+            this.setState({ Meta: "" });
+            this.setState({ City: "" });
+            this.setState({ Street: "" });
+            this.setState({ PostCode: "" });
+            this.setState({ SerialNo: "" });
+            this.setState({ Province: "" });
+            this.setState({ LandNo: "" });
+            this.setState({ Country: "" });
+            this.setState({ LandArea: "" });
+            this.setState({ LandLocation: "" });
 
-
-
-
-
+            this.setState({ Suc: true });
+        }
     }
 
 
@@ -290,6 +304,11 @@ class Makepop extends Component {
 
 
     render() {
+        let Success;
+        if (this.state.Suc) {
+            Success = <span style={{ color: 'green' }}>Successul</span>;
+
+        }
         if (this.state.red) {
             return <Redirect to="/companyportal" />
         }
@@ -471,6 +490,7 @@ onChange={this.updateEmail.bind(this)}   placeholder="City" />
                             <Button variant="primary" className="chkbtn" type="submit" >
                                 Submit
 </Button>
+&nbsp; &nbsp;&nbsp; {Success}
                         </Form>
 
 
